@@ -15,18 +15,23 @@
     <style>
       :root {
         /* Theme Variables */
-        --primary-color: #4a90e2; /* Original Blue */
-        --primary-hover: #357abd; /* Darker Blue */
-        --bg-color: #f8f9fa; /* Lighter Gray Background */
+        --primary-color: #1a56db; /* Higher contrast blue */
+        --primary-hover: #1a4bb8; /* Darker blue for better hover state */
+        --bg-color: #f1f3f5; /* Slightly darker background for better contrast */
         --card-bg-color: #ffffff;
-        --text-color: #343a40; /* Darker Gray Text */
-        --subtle-text-color: #6c757d; /* Softer text for less emphasis */
+        --text-color: #111827; /* Darker text for better readability */
+        --subtle-text-color: #374151; /* More contrast for subtle text */
         /* Style Variables */
-        --border-radius: 16px; /* Even slightly larger radius */
-        --shadow: 0 5px 15px rgba(0, 0, 0, 0.07); /* Slightly deeper default shadow */
-        --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Slightly deeper hover shadow */
-        --transition-speed: 0.3s; /* Slightly slower for smoother feel */
-        --transition-timing: ease-in-out; /* Smoother timing function */
+        --border-radius: 18px; /* More rounded corners */
+        --shadow: 0 6px 18px rgba(0, 0, 0, 0.09); /* Deeper default shadow */
+        --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* More pronounced hover shadow */
+        --transition-speed: 0.35s; /* Slightly slower transitions */
+        --transition-timing: cubic-bezier(
+          0.25,
+          0.8,
+          0.25,
+          1
+        ); /* Smoother timing function */
         /* RGB Variables for RGBA - Set by JS */
         --primary-color-rgb: 74, 144, 226;
         --card-bg-color-rgb: 255, 255, 255;
@@ -37,15 +42,15 @@
       /* Dark Mode */
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg-color: #121212;
-          --card-bg-color: #1e1e1e;
-          --text-color: #e8eaed;
-          --subtle-text-color: #adb5bd; /* Dark mode subtle text */
-          --shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-          --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-          --card-bg-color-rgb: 30, 30, 30;
-          --text-color-rgb: 232, 234, 237;
-          --bg-color-rgb: 18, 18, 18;
+          --bg-color: #0f172a; /* Darker background */
+          --card-bg-color: #1e293b; /* More contrast */
+          --text-color: #f8fafc; /* Brighter text */
+          --subtle-text-color: #94a3b8; /* Better contrast */
+          --shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+          --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+          --card-bg-color-rgb: 30, 41, 59;
+          --text-color-rgb: 248, 250, 252;
+          --bg-color-rgb: 15, 23, 42;
         }
       }
 
@@ -250,13 +255,14 @@
       .link-card:hover {
         box-shadow: var(--hover-shadow);
         border-color: rgba(var(--primary-color-rgb), 0.4);
-        transform: translateY(-6px) scale(1.02);
+        transform: translateY(-8px) scale(1.04);
         background-color: color-mix(
           in srgb,
-          var(--card-bg-color) 98%,
-          var(--primary-color) 2%
+          var(--card-bg-color) 96%,
+          var(--primary-color) 4%
         );
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1;
       }
       .link-card i {
         font-size: 2.4rem;
@@ -291,19 +297,19 @@
         box-shadow: 0 3px 8px rgba(var(--primary-color-rgb), 0.1); /* Shadow on icon hover */
       }
       .link-card h3 {
-        font-size: 1.05rem; /* Slightly larger */
+        font-size: 1.1rem; /* Larger font size */
         font-weight: 600;
         color: var(--text-color);
         margin: 0;
         word-break: break-word;
-        line-height: 1.45; /* Adjusted line height */
-        height: 2.9em; /* Allows for 2 lines, adjusted */
+        line-height: 1.5; /* Better line spacing */
+        height: 3em; /* Allows for better text display */
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         line-clamp: 2;
         -webkit-box-orient: vertical;
-        transition: color var(--transition-speed) var(--transition-timing);
+        transition: all var(--transition-speed) var(--transition-timing);
       }
       .link-card:hover h3 {
         color: var(--primary-hover); /* Title color changes on hover */
@@ -404,7 +410,15 @@
         }
       }
 
-      /* Responsive Adjustments (Keep previous adjustments, maybe slightly refine) */
+      /* Responsive Adjustments with more breakpoints */
+      @media (max-width: 1024px) {
+        main {
+          max-width: 1100px;
+        }
+        .link-grid {
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+      }
       @media (max-width: 768px) {
         header {
           padding: 3rem 1rem;
@@ -415,6 +429,7 @@
         main {
           padding: 0 1.5rem;
           margin: 2.5rem auto;
+          max-width: 100%;
         }
         .category-title {
           font-size: 1.7rem;
@@ -452,6 +467,17 @@
         .link-grid {
           grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
           gap: 1.5rem;
+        }
+      }
+      @media (max-width: 640px) {
+        header {
+          padding: 2.8rem 1rem;
+        }
+        header h1 {
+          font-size: 2.6rem;
+        }
+        .link-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         }
       }
       @media (max-width: 480px) {
@@ -504,7 +530,14 @@
           font-size: 0.8rem;
         }
       }
-
+      @media (max-width: 375px) {
+        header h1 {
+          font-size: 2.2rem;
+        }
+        .link-grid {
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+      }
       @media (max-width: 320px) {
         header h1 {
           font-size: 2rem;
